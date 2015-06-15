@@ -1,0 +1,10 @@
+﻿@model double?
+@{
+    var ti = ViewData.TemplateInfo;
+    var displayValue = string.Empty;
+    if (Model.HasValue)
+    {
+        displayValue = String.Format("{0:F}", @Model.Value);
+    }
+    <input id="@ti.GetFullHtmlFieldId(string.Empty)" name="@ti.GetFullHtmlFieldName(string.Empty)" type="text" value="@displayValue" class="form-control" />
+}

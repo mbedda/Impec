@@ -1,0 +1,55 @@
+﻿@model ImpecMC.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="@Url.Content("~/Content/Images/fav_icon.ico")" rel="icon" type="image/x-icon">
+
+    <title>Impec System - @ViewBag.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/Content/bootstrap/css/bootstrap.css")" rel="stylesheet" type="text/css" />
+
+    <!-- Custom styles for this template -->
+    <link href="@Url.Content("~/Content/bootstrap/css/signin.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div class="container">
+
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl },
+                       FormMethod.Post, new { @class = "form-signin" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <h2 class="form-signin-heading">Please sign in</h2>
+            @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Email address", @class = "form-control", @autofocus = "true" })
+            @Html.ValidationMessageFor(m => m.UserName)
+
+            @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password)
+            @*<label class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe, new { @value = "remember-me" })
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </label>*@
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        }
+    </div>
+    <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+</body>
+</html>

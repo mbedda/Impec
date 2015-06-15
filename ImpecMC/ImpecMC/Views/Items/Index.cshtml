@@ -1,0 +1,101 @@
+﻿@model PagedList.IPagedList<ImpecMC.Models.Item>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Items";
+}
+
+<h2>Items</h2>
+<br />
+<div class="well well-sm">
+    @using (Html.BeginForm("Import", "Items", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label for="file">Import Excel Sheet</label>
+            <input type="file" name="file" />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Upload" />
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>@using (Html.BeginForm("Index", "Items", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().PartNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UOM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().HSCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ShipmentIn.FZInNum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UOM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HSCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipmentIn.FZInNum)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

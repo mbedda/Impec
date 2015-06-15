@@ -1,0 +1,122 @@
+﻿@model ImpecMC.Models.ShipmentOut
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ShipmentOut</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CDNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CDNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShahadaNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShahadaNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KasimaNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KasimaNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExportNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExportNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SendDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SendDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceivedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceivedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceCompany.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerCompany.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

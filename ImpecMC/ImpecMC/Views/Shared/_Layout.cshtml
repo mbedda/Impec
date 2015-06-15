@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="@Url.Content("~/Content/Images/fav_icon.ico")" rel="icon" type="image/x-icon">
+
+    <title>Impec Management System - @ViewBag.Title</title>
+
+    <link href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Head", false)
+</head>
+
+<body>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Impec System", "Index", "Home", new { }, new { @class = "navbar-brand" })
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        <p class="navbar-text pull-right">
+                            Logged in as @User.Identity.Name -
+                            @Html.AntiForgeryToken()
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                        </p>
+                    }
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                        <li>@Html.ActionLink("Shipments In", "Index", "ShipmentsIn")</li>
+                        <li>@Html.ActionLink("Shipments Out", "Index", "ShipmentsOut")</li>
+                        <li>@Html.ActionLink("Items", "Inventory", "Items")</li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <!-- Begin page content -->
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted credit">© Impec 2015</p>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+                $('.date').datepicker();
+            });
+        </script>*@
+    <script src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            //$('.modal').on('hidden.bs.modal', function (event) {
+            //    $(this).removeClass('fv-modal-stack');
+            //    $('body').data('fv_open_modals', $('body').data('fv_open_modals') - 1);
+            //});
+
+
+            //$('.modal').on('shown.bs.modal', function (event) {
+
+            //    // keep track of the number of open modals
+
+            //    if (typeof ($('body').data('fv_open_modals')) == 'undefined') {
+            //        $('body').data('fv_open_modals', 0);
+            //    }
+
+
+            //    // if the z-index of this modal has been set, ignore.
+
+            //    if ($(this).hasClass('fv-modal-stack')) {
+            //        return;
+            //    }
+
+            //    $(this).addClass('fv-modal-stack');
+
+            //    //$('body').data('fv_open_modals', $('body').data('fv_open_modals') + 1);
+
+            //    $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals')));
+
+            //    $('.modal-backdrop').not('.fv-modal-stack')
+            //            .css('z-index', 1039 + (10 * $('body').data('fv_open_modals')));
+
+
+            //    $('.modal-backdrop').not('fv-modal-stack')
+            //            .addClass('fv-modal-stack');
+
+            //});
+
+            $('.date-picker').datepicker({
+                dateFormat: "d/m/yy"
+            });
+
+            $page = window.location.pathname;
+            if (!$page) {
+                $page = '';
+            }
+            $('.nav a').each(function () {
+                var $href = $(this).attr('href');
+                if (($href == $page) || ($href == '')) {
+                    $(this).parent().addClass('active');
+                }
+            });
+
+            //$('table').DataTable();
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

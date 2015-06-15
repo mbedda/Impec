@@ -1,0 +1,39 @@
+﻿@model System.Web.Security.MembershipUser
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>User</legend>
+
+    <table class="table table-bordered table-condensed table-striped">
+        <tr>
+            <th class="span3">Name
+            </th>
+            <th>Value
+            </th>
+        </tr>
+
+        <tr>
+            <td>Username</td>
+            <td>@Model.UserName</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>****</td>
+        </tr>
+    </table>
+</fieldset>
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Delete" />
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

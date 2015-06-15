@@ -1,0 +1,144 @@
+﻿@model ImpecMC.Models.ShipmentIn
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ShipmentIn</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FZInNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FZInNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommercialInvoiceNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommercialInvoiceNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AWBBOL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AWBBOL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocReceivedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocReceivedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivedPortDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivedPortDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivedFZDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivedFZDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FreightType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FreightType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Insurance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Insurance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipmentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipmentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClaimsNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClaimsNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Division)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Division.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,113 @@
+﻿@model PagedList.IPagedList<ImpecMC.Models.ShipmentIn>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Shipments In";
+}
+
+<h2>Shipments In</h2>
+<br />
+<div class="well well-sm">
+    @using (Html.BeginForm("Import", "ShipmentsIn", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label for="file">Import from Excel Sheet</label>
+            <input type="file" name="file" />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Upload" />
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "ShipmentsIn", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FZInNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Division)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().CommercialInvoiceNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().AWBBOL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FreightType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ShipmentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TotalCost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string rowclass = "";
+            switch (item.Status)
+            {
+                case ImpecMC.Models.ShipmentInStatus.Complete:
+                    rowclass = "success";
+                    break;
+                case ImpecMC.Models.ShipmentInStatus.Waiting:
+                    rowclass = "warning";
+                    break;
+                case ImpecMC.Models.ShipmentInStatus.Canceled:
+                    rowclass = "danger";
+                    break;
+            }
+            <tr class="@rowclass">
+                <td>
+                    @Html.DisplayFor(modelItem => item.FZInNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Division.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommercialInvoiceNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AWBBOL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FreightType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipmentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCost)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

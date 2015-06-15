@@ -1,0 +1,146 @@
+﻿<div>
+    <input data-val="true" ng-model="DeliveryTicketId" id="DeliveryTickedId" name="DeliveryTickedId" type="hidden">
+    <!-- Button trigger modal -->
+    <div class="form-group">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#NewDTItemModal">
+            Create
+        </button>
+    </div>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Part #
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Unit Price
+            </th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="DTItem in dtItemModel">
+            <td>
+                {{DTItem.PartNumber}}
+            </td>
+            <td>
+                {{DTItem.Quantity}}
+            </td>
+            <td>
+                {{DTItem.UnitPrice}}
+            </td>
+            <td>
+                <a href="#" ng-click="showEditDTItemModal(DTItem)">Edit</a> | <a href="#" ng-click="showDeleteDTItemModal(DTItem)">Delete</a>
+            </td>
+        </tr>
+    </table>
+    <!-- New DTItem Modal -->
+    <div class="modal fade" id="NewDTItemModal" tabindex="-1" role="dialog" aria-labelledby="NewDTItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" ng-click="cancelNewDTItem(form)"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Delivery Ticket Item</h4>
+                </div>
+
+                <form name="form" novalidate>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <label for="DTItemPartNumber" class="control-label col-md-3">Part #</label>
+                                <div class="col-md-9">
+                                    <select name="Items" ng-model="new.DTItem.ItemId" ng-options="item.Id as item.PartNumber for item in items" class="form-control">
+                                        <option value="">Items</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DTItemQuantity" class="control-label col-md-3">Quantity</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" ng-model="new.DTItem.Quantity" data-val="true" data-val-number="The field Quantity must be a number." id="DTItemQuantity" name="DTItemQuantity" type="number" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DTItemUnitPrice" class="control-label col-md-3">Unit Price</label>
+                                <div class="col-md-9">
+                                    <input ng-model="new.DTItem.UnitPrice" id="DTItemUnitPrice" name="DTItemUnitPrice" type="text" value="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="cancelNewDTItem(form)">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="createDTItem(form)">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit DTItem Modal -->
+    <div class="modal fade" id="EditDTItemModal" tabindex="-1" role="dialog" aria-labelledby="EditDTItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" ng-click="cancelEditDTItem(form)"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Delivery Ticket Item</h4>
+                </div>
+
+                <form name="form" novalidate>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <label for="DTItemPartNumber" class="control-label col-md-3">Part #</label>
+                                <div class="col-md-9">
+                                    <select name="Items" ng-model="edit.DTItem.ItemId" ng-options="item.Id as item.PartNumber for item in items" class="form-control">
+                                        <option value="">Items</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DTItemQuantity" class="control-label col-md-3">Quantity</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" ng-model="edit.DTItem.Quantity" data-val="true" data-val-number="The field Quantity must be a number." id="DTItemQuantity" name="DTItemQuantity" type="number" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DTItemUnitPrice" class="control-label col-md-3">Unit Price</label>
+                                <div class="col-md-9">
+                                    <input ng-model="edit.DTItem.UnitPrice" id="DTItemUnitPrice" name="DTItemUnitPrice" type="text" value="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="cancelEditDTItem(form)">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="editDTItem(form)">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete DTItem Modal -->
+    <div class="modal fade" id="DeleteDTItemModal" tabindex="-1" role="dialog" aria-labelledby="DeleteDTItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" ng-click="cancelDeleteDTItem()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Delete Item - Part #: {{delete.DTItem.PartNumber}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you would like to remove this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="cancelDeleteDTItem()">Cancel</button>
+                    <button type="button" class="btn btn-danger" ng-click="deleteDTItem(delete.DTItem.Id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

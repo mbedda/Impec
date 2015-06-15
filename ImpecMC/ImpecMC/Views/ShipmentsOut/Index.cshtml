@@ -1,0 +1,112 @@
+﻿@model PagedList.IPagedList<ImpecMC.Models.ShipmentOut>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Shipments Out";
+}
+
+<h2>Shipments Out</h2>
+<br />
+<div class="well well-sm">
+    @using (Html.BeginForm("ImportDT", "ShipmentsOut", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label for="file">Import Delivery Tickets from Excel Sheet</label>
+            <input type="file" name="file" />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Upload" />
+    }
+</div>
+
+<br />
+<div class="well well-sm">
+    @using (Html.BeginForm("ImportSO", "ShipmentsOut", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label for="file">Import Shipment Out from Excel Sheet</label>
+            <input type="file" name="file" />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Upload" />
+    }
+</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "ShipmentsOut", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().InvoiceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().CDNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ShahadaNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().KasimaNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ExportNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ServiceCompany)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().OwnerCompany)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CDNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShahadaNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KasimaNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExportNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceCompany.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerCompany.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Generate Invoice", "Download", new { id = item.Id }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
